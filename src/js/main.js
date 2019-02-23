@@ -51,11 +51,17 @@ $(document).ready(function() {
     });
 
     function hideSidebar() {
+        $('.btn-menu').removeClass('active');
+        $body.removeClass('menu-active');
+
         $('.sidebar').removeClass('active');
         $body.removeAttr('style');
     }
 
     function showSidebar() {
+        $('.btn-menu').addClass('active');
+        $body.addClass('menu-active');
+
         $('.sidebar').addClass('active');
         $body.css({
             'padding-right': SW
@@ -63,9 +69,6 @@ $(document).ready(function() {
     }
 
     $('.btn-menu').click(function(eventObject) {
-        $(this).toggleClass('active');
-        $body.toggleClass('menu-active');
-
         if ($('.sidebar').hasClass('active')) {
             hideSidebar();
         } else {

@@ -1295,7 +1295,10 @@ background-image: url("/img/ico/ico-15-hover.png"); }
 align-self: center; }
 .sidebar.active {
 visibility: visible;
-left: 0;}
+left: 0;
+cursor: pointer;}
+.sidebar.active .sidebar-nav {
+cursor: default;}
 .sidebar-nav .btn-menu {
 position: absolute;
 top: 0px;
