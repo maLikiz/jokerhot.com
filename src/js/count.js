@@ -1,22 +1,36 @@
-function startTimer(){
+var inttt;
+function timer10() {
+	clearInterval(inttt)
+	var i = 10;
+	inttt = setInterval(function(){
+		i--;
+		if (i <= 0)
+			{i = 10}
+		$('#timer10').text(i);
+	},1000);
+}
+
+
+
+function startTimer1(){
 setInterval(function(){
-if (timer.seconds == 0){
-timer.seconds = 59;
-if (timer.minutes == 0){
-timer.minutes = 59;
-if (timer.hours == 0){
-timer.hours = 23;
-timer.days--; } else {
-timer.hours--; }
-} else { timer.minutes--;
-} } else { timer.seconds--; }
-renderTimer(); }, 1000);
-renderTimer(); }
-function renderTimer(){
-$('#tournament1 .countDays .digit.static').html((timer.days < 10 ? '0' : '') + timer.days);
-$('#tournament1 .countHours .digit.static').html((timer.hours < 10 ? '0' : '') + timer.hours);
-$('#tournament1 .countMinutes .digit.static').html((timer.minutes < 10 ? '0' : '') + timer.minutes);
-$('#tournament1 .countSeconds .digit.static').html((timer.seconds < 10 ? '0' : '') + timer.seconds); }
+if (timer1.seconds == 0){
+timer1.seconds = 59;
+if (timer1.minutes == 0){
+timer1.minutes = 59;
+if (timer1.hours == 0){
+timer1.hours = 23;
+timer1.days--; } else {
+timer1.hours--; }
+} else { timer1.minutes--;
+} } else { timer1.seconds--; }
+rendertimer1(); }, 1000);
+rendertimer1(); }
+function rendertimer1(){
+$('#tournament1 .countDays .digit.static').html((timer1.days < 10 ? '0' : '') + timer1.days);
+$('#tournament1 .countHours .digit.static').html((timer1.hours < 10 ? '0' : '') + timer1.hours);
+$('#tournament1 .countMinutes .digit.static').html((timer1.minutes < 10 ? '0' : '') + timer1.minutes);
+$('#tournament1 .countSeconds .digit.static').html((timer1.seconds < 10 ? '0' : '') + timer1.seconds); }
 function startTimer2(){
 setInterval(function(){
 if (timer2.seconds == 0){

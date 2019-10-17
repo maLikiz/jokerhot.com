@@ -1,94 +1,177 @@
 function getCookie(name){
-var cookie = ' ' + document.cookie,
-search = ' ' + name + '=',
-setStr = null,
-offset = 0,
-end = 0;
-if (cookie.length > 0){
-offset = cookie.indexOf(search);
-if (offset != -1){
-offset += search.length;
-end = cookie.indexOf(';', offset);
-if (end == -1){
-end = cookie.length; }
-setStr = unescape(cookie.substring(offset, end)); }
+var cookie=' '+document.cookie,
+search=' '+name+'=',
+setStr=null,
+offset=0,
+end=0;
+if(cookie.length>0){
+offset=cookie.indexOf(search);
+if(offset!=-1){
+offset+=search.length;
+end=cookie.indexOf(';',offset);
+if(end==-1){
+end=cookie.length; }
+setStr=unescape(cookie.substring(offset, end)); }
 } return (setStr); }
-function login(){ $.ajax({
+function reg(){ $.ajax({
+beforeSend: function(){ $('#reg_button').prop('disabled', true); },
+complete: function(){ $('#reg_button').prop('disabled', false); },
 type: 'POST',
-url: '/core/login/',
+url: '/core/ajax/signup/',
 data:{ js: 1,
-log_log: $('#log_log').val(),
-log_pas: $('#log_pas').val()},
-cache: false,
-error: function(){
-alert('Error!');},
-success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
-$('#log_error').show();
-$('#log_error').html('');
-$('#'+data['where']).html(data['text']);
-}else{ if(getCookie('lng')=='EN'){
-location.replace('/en/'); }
-if(getCookie('lng')=='TR'){
-location.replace('/tr/'); }else{
-location.replace('/'); } }
-} catch (e){ alert('Error!'); } } }); }
-function signup(){ $.ajax({
-type: 'POST',
-url: '/core/signup/',
-data:{ js: 1,
-reg_log: $('#reg_log').val(),
-reg_pas: $('#reg_pas').val(),
-reg_ema: $('#reg_ema').val(),
-reg_cur: $('#reg_cur').val(),
-reg_gif: 1},
+user: $('#user').val(),
+email: $('#reg_email').val(),
+pass: $('#reg_password').val(),
+currency: $('#reg_currency').val(),
+gift: $('#reg_gift').val(),
+news: $('#reg_news').val(),
+terms: $('#reg_terms').val()},
 cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
-$('#reg_error').show();
-$('#reg_error').html('');
-$('#'+data['where']).html(data['text']);
+try{ data=JSON.parse(data);
+if(data){ $('#reg_error').html('');
+$('#reg_error').html(data);
 }else{ if(getCookie('lng')=='EN'){
-location.replace('/en/'); }
-if(getCookie('lng')=='TR'){
-location.replace('/tr/'); }else{
+location.replace('/en/'); }else{
 location.replace('/'); } } }
 catch (e){ alert('Error!'); } } }); }
-function recovery(){ $.ajax({
+
+
+
+function finish(){ $.ajax({
+beforeSend: function(){ $('#fin_button').prop('disabled', true); },
+complete: function(){ $('#fin_button').prop('disabled', false); },
 type: 'POST',
-url: '/core/recovery/',
+url: '/core/ajax/finish/',
 data:{ js: 1,
-rec_log: $('#rec_log').val()},
+currency: $('#fin_currency').val(),
+gift: $('#fin_gift').val(),
+news: $('#fin_news').val(),
+terms: $('#fin_terms').val()},
 cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
-$('#rec_error').show();
-$('#rec_error').html('');
-$('#'+data['where']).html(data['text']); }
-} catch (e){ alert('Error!'); } } }); }
+try{ data=JSON.parse(data);
+if(data){ $('#fin_error').html('');
+$('#fin_error').html(data);
+}else{ if(getCookie('lng')=='EN'){
+location.replace('/en/'); }else{
+location.replace('/'); } } }
+catch (e){ alert('Error!'); } } }); }
+
+
+function signup(){ $.ajax({
+beforeSend: function(){ $('#signup_button').prop('disabled', true); },
+complete: function(){ $('#signup_button').prop('disabled', false); },
+type: 'POST',
+url: '/core/ajax/signup/',
+data:{ js: 1,
+user: $('#signup_user').val(),
+email: $('#signup_email').val(),
+pass: $('#signup_password').val(),
+currency: $('#signup_currency').val(),
+gift: $('#signup_gift').val(),
+news: $('#signup_news').val(),
+terms: $('#signup_terms').val()},
+cache: false,
+error: function(){
+alert('Error!'); },
+success: function(data){
+try{ data=JSON.parse(data);
+if(data){ $('#signup_error').html('');
+$('#signup_error').html(data);
+}else{ if(getCookie('lng')=='EN'){
+location.replace('/en/'); }else{
+location.replace('/'); } } }
+catch (e){ alert('Error!'); } } }); }
+
+
+
+
+
+
+
+function winners(){
+$.ajax({ type: 'POST',
+url: '/core/winners/',
+data: {js: 1},
+cache: false,
+success: function(html){
+$('#winners').html(html); } }); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function login(){ $.ajax({
+beforeSend: function(){ $('#log_button').prop('disabled', true); },
+complete: function(){ $('#log_button').prop('disabled', false); },
+type: 'POST',
+url: '/core/ajax/login/',
+data:{ js: 1,
+log_user: $('#log_user').val(),
+log_pass: $('#log_pass').val()},
+cache: false,
+error: function(){
+alert('Error!'); },
+success: function(data){
+try{ data=JSON.parse(data);
+if(data){
+$('#log_error').html('');
+$('#log_error').html(data);
+}else{ if(getCookie('lng')=='EN'){
+location.replace('/en/'); }else{
+location.replace('/'); } } }
+catch (e){ alert('Error!'); } } }); }
+
+function restore(){ $.ajax({
+beforeSend: function(){ $('#res_button').prop('disabled', true); },
+complete: function(){ $('#res_button').prop('disabled', false); },
+type: 'POST',
+url: '/core/ajax/restore/',
+data:{ js: 1,
+res_email: $('#res_email').val(),
+res_phone: $('#res_phone').val(),
+res_user: $('#res_user').val()},
+cache: false,
+error: function(){
+alert('Error!'); },
+success: function(data){
+try{ data=JSON.parse(data);
+if(data){ $('#res_error').html('');
+$('#res_error').html(data); } }
+catch (e){ alert('Error!'); } } }); }
+
+
 function jackpot(){ $('#jackpot').load('/core/jackpot/'); }
 function withdraw(){ $.ajax({
 type: 'POST',
-url: '/core/withdraw/',
+url: '/core/ajax/withdraw/',
 data:{ js: 1,
-wit_sys: $('#wit_sys').val(),
-wit_acc: $('#wit_acc').val(),
-wit_sum: $('#wit_sum').val()},
+wit_system: $('.withdraw .payment.active').data('system'),
+wit_account: $('#wit_account').val(),
+wit_amount: $('#wit_amount').val()},
 cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
-$('#wit_error').html('');
-$('#'+data['where']).html(data['text']); } }
+try{ data=JSON.parse(data);
+if(data){ $('#wit_error').html('');
+$('#wit_error').html(data); } }
 catch (e){ alert('Error!'); } } }); }
 function points(){
 $.ajax({
@@ -100,8 +183,8 @@ cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
+try{ data=JSON.parse(data);
+if(data['text']){
 $('#cp_error').html('');
 $('#'+data['where']).html(data['text']); }
 } catch (e){ alert('Error!'); } } }); }
@@ -122,8 +205,8 @@ cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
+try{ data=JSON.parse(data);
+if(data['text']){
 $('#pr_error').html('');
 $('#'+data['where']).html(data['text']); }
 } catch (e){ alert('Error!'); } } }); }
@@ -142,8 +225,89 @@ cache: false,
 error: function(){
 alert('Error!'); },
 success: function(data){
-try{ data = JSON.parse(data);
-if (data['text']){
+try{ data=JSON.parse(data);
+if(data['text']){
 $('#st_error').html('');
 $('#'+data['where']).html(data['text']); }
 } catch (e){ alert('Error!'); } } }); }
+
+
+
+function support(){ $.ajax({
+type: 'POST',
+url: '/core/support/',
+data:{ js: 1,
+sup_nam: $('#sup_nam').val(),
+sup_con: $('#sup_con').val(),
+sup_mes: $('#sup_mes').val()},
+cache: false,
+error: function(){
+alert('Error!');},
+success: function(data){
+try{ data=JSON.parse(data);
+if(data['text']){
+$('#sup_error').html('');
+$('#'+data['where']).html(data['text']);
+} } catch (e){ alert('Error!'); } } }); }
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function(){
+
+
+
+
+$('.gamebrand').on('keyup click', function(){
+brand=$(this).data('value');
+if(brand.length==2){
+$.ajax({ type: 'POST',
+url: '/core/sort/',
+data: {'brandquery':brand,
+'typequery':1},
+cache: false,
+success: function(html){
+$('#games').html(html);}}); } });
+
+$('.gametype').on('keyup click', function(){
+
+    var $this = $(this);
+
+    $('.gametype').removeClass('active');
+
+    if ($this.hasClass('active')) {
+      $this.removeClass('active');
+    } else {
+      $this.addClass('active');
+    }
+
+
+type=$(this).data('value');
+if(type.length==2){
+$.ajax({ type: 'POST',
+url: '/core/sort/',
+data: {'brandquery':1,
+'typequery':type},
+cache: false,
+success: function(html){
+$('#games').html(html);}}); } });
+
+
+
+$('#gamesearch').on('keyup input change click', function(){
+searchquery=$(this).val();
+if(searchquery.length>=2){
+$.ajax({ type: 'POST',
+url: '/core/search/',
+data: {'searchquery':searchquery},
+cache: false,
+success: function(html){
+$('#games').html(html);}}); } });
+
+});

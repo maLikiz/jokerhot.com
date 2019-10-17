@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
-$('#signup').submit(function(){ signup(); });
-$('#login').submit(function(){ login(); });
-$('#restore').submit(function(){ restore(); });
+
 
 $(document).on('submit','form.bitcoin',function(){
 $('.loading').show(); timer10(); });
@@ -12,7 +10,7 @@ $('.loading').show(); timer10(); });
     var $body = $('body');
 
     jackpot();
-    setInterval(jackpot, 10000);
+    setInterval(jackpot, 1000);
 
     $('.screenshots-carousel').slick({
         centerMode: true,
