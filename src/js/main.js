@@ -59,20 +59,29 @@ $('.loading').show(); timer10(); });
     });
 
     function hideSidebar() {
-        $('.sidebar').removeClass('active');
-        $body.removeAttr('style');
+        $('.sidebar').removeClass('show');
+        $('.btn-menu').removeClass('active');
+
+        setTimeout(function() {
+            $('.sidebar').removeClass('active');
+            $body.removeAttr('style');
+            $body.removeClass('menu-active');
+        }, 300)
     }
 
     function showSidebar() {
-        $('.sidebar').addClass('active');
-        $body.css({
-            'padding-right': SW
-        });
+        $('.sidebar').addClass('active show');
+        $('.btn-menu').addClass('active')
+
+        $body
+          .addClass('menu-active')
+          .css({
+              'padding-right': SW
+          });
     }
 
     $('.btn-menu').click(function(eventObject) {
         $(this).toggleClass('active');
-        $body.toggleClass('menu-active');
 
         if ($('.sidebar').hasClass('active')) {
             hideSidebar();
